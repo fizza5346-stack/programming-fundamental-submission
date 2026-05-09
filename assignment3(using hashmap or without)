@@ -1,0 +1,155 @@
+*1. Product Wise Sum - Without HashMap*
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+
+class ProductSumNoHashMap {
+    public static void main(String[] args) {
+        File f1 = new File("c:\\temp\\SalesEVESession.txt");
+        ArrayList<String> products = new ArrayList<>();
+        ArrayList<Double> sums = new ArrayList<>();
+
+        try {
+            Scanner inp = new Scanner(f1);
+            if (inp.hasNextLine()) inp.nextLine(); 
+
+            while (inp.hasNextLine()) {
+                String dl = inp.nextLine().trim();
+                if (dl.isEmpty()) continue;
+
+                String[] parts = dl.split("\t");
+                String product = parts[1];
+                double amount = Double.parseDouble(parts[2]) * Double.parseDouble(parts[3]);
+
+                int index = products.indexOf(product);
+                if (index == -1) {
+                    products.add(product);
+                    sums.add(amount);
+                } else {
+                    sums.set(index, sums.get(index) + amount);
+                }
+            }
+            inp.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        System.out.println("--- Product Wise Total (No HashMap) ---");
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i) + " : " + sums.get(i));
+        }
+    }
+}
+*2. Product Wise Sum - With Hashmap*
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.io.File;
+
+class ProductSumHashMap {
+    public static void main(String[] args) {
+        File f1 = new File("c:\\temp\\SalesEVESession.txt");
+        HashMap<String, Double> hm = new HashMap<>();
+
+        try {
+            Scanner inp = new Scanner(f1);
+            if (inp.hasNextLine()) inp.nextLine(); 
+            while (inp.hasNextLine()) {
+                String dl = inp.nextLine().trim();
+                if (dl.isEmpty()) continue;
+
+                String[] parts = dl.split("\t");
+                String product = parts[1];
+                double amount = Double.parseDouble(parts[2]) * Double.parseDouble(parts[3]);
+
+                hm.put(product, hm.getOrDefault(product, 0.0) + amount);
+            }
+            inp.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        System.out.println("--- Product Wise Total (With HashMap) ---");
+        for (Map.Entry<String, Double> me : hm.entrySet()) {
+            System.out.println(me.getKey() + " : " + me.getValue());
+        }
+    }
+}
+*3. ID Wise Sum - Without HashMap*
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+
+class RepIDSumNoHashMap {
+    public static void main(String[] args) {
+        File f1 = new File("c:\\temp\\SalesEVESession.txt");
+        ArrayList<String> repIDs = new ArrayList<>();
+        ArrayList<Double> sums = new ArrayList<>();
+
+        try {
+            Scanner inp = new Scanner(f1);
+            if (inp.hasNextLine()) inp.nextLine(); 
+
+            while (inp.hasNextLine()) {
+                String dl = inp.nextLine().trim();
+                if (dl.isEmpty()) continue;
+
+                String[] parts = dl.split("\t");
+                String repID = parts[5];
+                double amount = Double.parseDouble(parts[2]) * Double.parseDouble(parts[3]);
+
+                int index = repIDs.indexOf(repID);
+                if (index == -1) {
+                    repIDs.add(repID);
+                    sums.add(amount);
+                } else {
+                    sums.set(index, sums.get(index) + amount);
+                }
+            }
+            inp.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        System.out.println("--- Rep ID Wise Total (No HashMap) ---");
+        for (int i = 0; i < repIDs.size(); i++) {
+            System.out.println(repIDs.get(i) + " : " + sums.get(i));
+        }
+    }
+}
+ *4. ID Wise Sum -With Hashmap*
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.io.File;
+
+class RepIDSumHashMap {
+    public static void main(String[] args) {
+        File f1 = new File("c:\\temp\\SalesEVESession.txt");
+        HashMap<String, Double> hm = new HashMap<>();
+
+        try {
+            Scanner inp = new Scanner(f1);
+            if (inp.hasNextLine()) inp.nextLine(); 
+
+            while (inp.hasNextLine()) {
+                String dl = inp.nextLine().trim();
+                if (dl.isEmpty()) continue;
+
+                String[] parts = dl.split("\t");
+                String repID = parts[5];
+                double amount = Double.parseDouble(parts[2]) * Double.parseDouble(parts[3]);
+
+                hm.put(repID, hm.getOrDefault(repID, 0.0) + amount);
+            }
+            inp.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        System.out.println("--- Rep ID Wise Total (With HashMap) ---");
+        for (Map.Entry<String, Double> me : hm.entrySet()) {
+            System.out.println(me.getKey() + " : " + me.getValue());
+        }
+    }
+}
